@@ -3,6 +3,8 @@ package com.jsobral.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
@@ -31,23 +34,23 @@ public class Corporate implements Serializable{
 	private String vatNumber;
 	@ManyToOne
 	private Hotel hotel;
-	@OneToMany
+	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="CONTACT_ID")
-	private Collection<CorporateContact> contacts = new ArrayList<CorporateContact>();
-	@OneToMany
+	private CorporateContact contact;
+	@OneToMany(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="PROMO_PRICE_ID")
 	private Collection<PromoPrice> promoPrices = new ArrayList<PromoPrice>();
 	
 	
 	//GETTERS AND SETTERS
-	public Collection<CorporateContact> getContacts() {
-		return contacts;
-	}
-	public void setContacts(Collection<CorporateContact> contacts) {
-		this.contacts = contacts;
-	}
 	public Collection<PromoPrice> getPromoPrices() {
 		return promoPrices;
+	}
+	public CorporateContact getContact() {
+		return contact;
+	}
+	public void setContact(CorporateContact contact) {
+		this.contact = contact;
 	}
 	public void setPromoPrices(Collection<PromoPrice> promoPrices) {
 		this.promoPrices = promoPrices;

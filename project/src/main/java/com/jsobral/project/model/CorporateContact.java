@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class CorporateContact implements Serializable{
 	private String contactPhone;
 	@Column(name="CONTACT_EMAIL")
 	private String contactEmail;
-	@ManyToOne
+	@OneToOne
 	private Corporate corporate;
 	
 	

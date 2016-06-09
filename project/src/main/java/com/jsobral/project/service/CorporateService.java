@@ -20,7 +20,7 @@ public class CorporateService {
 	}
 	
 	public List findByParams(Corporate company){
-		return dao.findWithParams(company);
+		return dao.findByParams(company);
 	}
 	
 	@Transactional

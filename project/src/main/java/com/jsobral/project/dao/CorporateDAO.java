@@ -9,7 +9,7 @@ import com.jsobral.project.model.Corporate;
 public class CorporateDAO extends BaseDAO{
 	
 	@Transactional
-	public List findWithParams(Corporate company){
+	public List findByParams(Corporate company){
 		return (List) super.em.createQuery(
 				"SELECT c FROM Corporate c WHERE c.corporateName LIKE :cName "+
 				"AND c.corporateAddress LIKE :cAddress "+
@@ -20,5 +20,4 @@ public class CorporateDAO extends BaseDAO{
 				.getResultList();
 	}
 
-	//delete all contacts
 }
