@@ -17,7 +17,7 @@ import com.jsobral.project.service.CorporateService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
-@TransactionConfiguration(defaultRollback = false, transactionManager = "transactionManager")
+@TransactionConfiguration(defaultRollback = true, transactionManager = "transactionManager")
 public class CorporateTests {
 
 	@Autowired
@@ -51,6 +51,7 @@ public class CorporateTests {
 		company.setCorporateAddress("Dublin");
 		company.setVatNumber("VATN");
 		company.setContact(savedContact);
+		company.setHotel(savedHotel);
 		
 		Corporate persistedCorp = (Corporate) dao.save(company);
 
@@ -67,8 +68,6 @@ public class CorporateTests {
 	@Transactional
 	public void testFilteredGet() {
 
-
-
 		// preping search fields object to be sent to find method, 
 		// only stars is matchable
 		Corporate searchObject = new Corporate();
@@ -80,7 +79,7 @@ public class CorporateTests {
 		List testList = service.findByParams(searchObject);
 		Corporate corp0 = (Corporate) testList.get(0);
 		System.out.println(corp0.getCorporateName() + " " + corp0.getVatNumber());
-		assertEquals(testList.size(), 1);
+		assertEquals(testList.size(), 4);
 
 	}
 

@@ -15,7 +15,7 @@ import com.jsobral.project.service.HotelService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
-@TransactionConfiguration(defaultRollback=false,transactionManager="transactionManager")
+@TransactionConfiguration(defaultRollback=true,transactionManager="transactionManager")
 public class HotelTests {
 	
 	@Autowired
@@ -57,15 +57,17 @@ public class HotelTests {
 		dao.save(hotel);
 		
 		//preping search  fields object to be sent to find method, only stars is matchable
-		Hotel persistedHotel = new Hotel();
-		persistedHotel.setHotelName("");
-		persistedHotel.setHotelEmail("");
-		persistedHotel.setHotelAddress("");		
-		persistedHotel.setStars((short)8);
+		Hotel searchObject = new Hotel();
+		searchObject.setHotelName("");
+		searchObject.setHotelEmail("");
+		searchObject.setHotelAddress("");		
+		searchObject.setStars((short)8);
 		
-		List testList = service.findByParams(persistedHotel);
+		List testList = service.findByParams(searchObject);
 		Hotel hotel0 = (Hotel)testList.get(0);
 		System.out.println(hotel0.getHotelName()+" "+hotel0.getStars()+" stars" );
-		assertEquals(testList.size(),1);
+		assertEquals(testList.size(),5);
 	}
+	
+
 }

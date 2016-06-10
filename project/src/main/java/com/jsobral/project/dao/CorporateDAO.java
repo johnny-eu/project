@@ -13,12 +13,10 @@ public class CorporateDAO extends BaseDAO{
 		return (List) super.em.createQuery(
 				"SELECT c FROM Corporate c WHERE c.corporateName LIKE :cName "+
 				"AND c.corporateAddress LIKE :cAddress "+
-				"AND c.vatNumber LIKE :vat "+
-				"AND c.hotel LIKE :hotel")
+				"AND c.vatNumber LIKE :vat ")
 				.setParameter("cName", company.getCorporateName()+"%")
 				.setParameter("cAddress", company.getCorporateAddress()+"%")
 				.setParameter("vat", company.getVatNumber()+"%")
-				.setParameter("hotel", company.getHotel())
 				.getResultList();
 	}
 
