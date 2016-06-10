@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 @Table(name="LOGIN_DETAILS")
 public class Login implements Serializable{
 
+
+	private static final long serialVersionUID = 3609928620497828591L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="LOGIN_ID")
@@ -23,10 +25,10 @@ public class Login implements Serializable{
 	private String username;
 	@Column(name="PASSWORD")
 	private String password;
+	
 	@OneToOne
 	private Hotel hotel;
 	
-
 	public Login(){}
 	
 	public Login(int loginId, String username, String password) {

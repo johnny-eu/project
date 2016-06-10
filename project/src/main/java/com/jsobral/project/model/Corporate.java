@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Table(name="CORPORATE")
 public class Corporate implements Serializable{
 	
+	private static final long serialVersionUID = 3256810273915894350L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CORPORATE_ID")
@@ -32,13 +33,16 @@ public class Corporate implements Serializable{
 	private String corporateAddress;
 	@Column(name="VAT")
 	private String vatNumber;
+	
 	@ManyToOne
+	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
+	
 	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="CONTACT_ID")
 	private CorporateContact contact;
-	@OneToMany(cascade=CascadeType.REMOVE)
-	@JoinColumn(name="PROMO_PRICE_ID")
+	
+	@OneToMany(mappedBy="corporate",cascade=CascadeType.ALL)
 	private Collection<PromoPrice> promoPrices = new ArrayList<PromoPrice>();
 	
 	

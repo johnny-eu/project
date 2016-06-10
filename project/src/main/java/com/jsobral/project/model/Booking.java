@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class Booking implements Serializable{
 
 	
+	private static final long serialVersionUID = 378711901115296383L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="BOOKING_ID")
@@ -41,11 +42,16 @@ public class Booking implements Serializable{
 	@Column(name="DATE_CREATED")
 	@Temporal(TemporalType.DATE)
 	private Date created;
+	
+	
 	@ManyToOne
+	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
 	@ManyToOne
+	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
 	@ManyToOne
+	@JoinColumn(name="ROOM_ID")
 	private RoomType roomType;	
 	@OneToOne
 	@JoinColumn(name="PAY_ID")

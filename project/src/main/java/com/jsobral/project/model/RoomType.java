@@ -3,12 +3,12 @@ package com.jsobral.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 @Table(name="ROOM_TYPES")
 public class RoomType implements Serializable{
 
+
+	private static final long serialVersionUID = -3109857026185144630L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ROOM_ID")
@@ -35,17 +37,14 @@ public class RoomType implements Serializable{
 	private short children;
 	@ManyToOne
 	private Hotel hotel;
-	@OneToMany
-	@JoinColumn(name="BOOKING_ID")
+	
+	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<Booking> bookings = new ArrayList<Booking>();
-	@OneToMany
-	@JoinColumn(name="PROMO_PRICE_ID")
+	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<PromoPrice> promoPrices = new ArrayList<PromoPrice>();
-	@OneToMany
-	@JoinColumn(name="PAY_ID")
+	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<Promotion> promotions = new ArrayList<Promotion>();
-	@OneToMany
-	@JoinColumn(name="AVAILABIITY_ID")
+	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<Availability> availability = new ArrayList<Availability>();
 	
 	

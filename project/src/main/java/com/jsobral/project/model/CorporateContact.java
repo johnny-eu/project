@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
@@ -17,6 +16,8 @@ import org.springframework.stereotype.Component;
 @Table(name="CORPORATE_CONTACTS")
 public class CorporateContact implements Serializable{
 
+
+	private static final long serialVersionUID = -3768806551219766198L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CONTACT_ID")
@@ -29,6 +30,7 @@ public class CorporateContact implements Serializable{
 	private String contactPhone;
 	@Column(name="CONTACT_EMAIL")
 	private String contactEmail;
+	
 	@OneToOne
 	private Corporate corporate;
 	

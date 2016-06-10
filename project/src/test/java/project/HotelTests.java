@@ -15,7 +15,7 @@ import com.jsobral.project.service.HotelService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
-@TransactionConfiguration(defaultRollback=true,transactionManager="transactionManager")
+@TransactionConfiguration(defaultRollback=false,transactionManager="transactionManager")
 public class HotelTests {
 	
 	@Autowired

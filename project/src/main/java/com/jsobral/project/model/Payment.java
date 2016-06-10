@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 @Table(name="PAYMENTS")
 public class Payment implements Serializable{
 	
+
+	private static final long serialVersionUID = -3718766294958689283L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PAY_ID")

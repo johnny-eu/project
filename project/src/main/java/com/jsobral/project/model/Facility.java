@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 @Table(name="FACILITIES")
 public class Facility implements Serializable{
 
+
+	private static final long serialVersionUID = 1895150309153815277L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="FACILITY_ID")
@@ -23,7 +26,9 @@ public class Facility implements Serializable{
 	private String facility;
 	@Column(name="SUPPORTED")
 	private short supported;
+	
 	@ManyToOne
+	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
 	
 	

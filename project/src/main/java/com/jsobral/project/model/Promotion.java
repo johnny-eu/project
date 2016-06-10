@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Component;
 @Table(name="PROMOTIONS")
 public class Promotion implements Serializable{
 	
+
+	private static final long serialVersionUID = 771839612881761458L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PROMOTION_ID")
@@ -32,9 +35,12 @@ public class Promotion implements Serializable{
 	private Date endDate;
 	@Column(name="PROMOTION_PRICE")
 	private double price;
+	
 	@ManyToOne
+	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
 	@ManyToOne
+	@JoinColumn(name="ROOM_ID")
 	private RoomType roomType;
 	
 	

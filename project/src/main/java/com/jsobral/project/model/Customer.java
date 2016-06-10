@@ -3,12 +3,12 @@ package com.jsobral.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Table(name="CUSTOMERS")
 public class Customer implements Serializable{
 	
+
+	private static final long serialVersionUID = -1815669718185244464L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CUSTOMER_ID")
@@ -34,20 +36,21 @@ public class Customer implements Serializable{
 	private String city;
 	@Column(name="CUST_COUNTRY")
 	private String country;
-	@OneToMany
-	@JoinColumn(name="CORPORATE_ID")
-	private Collection<Corporate> corporate = new ArrayList<Corporate>();
+	
+	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
+	private Collection<Booking> bookings = new ArrayList<Booking>();
 	
 	
 	//GETTERS AND SETTERS
-	public Collection<Corporate> getCorporate() {
-		return corporate;
-	}
-	public void setCorporate(Collection<Corporate> corporate) {
-		this.corporate = corporate;
-	}
+
 	public int getCustomerId() {
 		return customerId;
+	}
+	public Collection<Booking> getBookings() {
+		return bookings;
+	}
+	public void setBookings(Collection<Booking> bookings) {
+		this.bookings = bookings;
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;

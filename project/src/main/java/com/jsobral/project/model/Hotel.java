@@ -3,6 +3,8 @@ package com.jsobral.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,8 @@ import org.springframework.stereotype.Component;
 @Table(name="HOTELS")
 public class Hotel implements Serializable{
 	
+
+	private static final long serialVersionUID = 5395904930062419286L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="HOTEL_ID")
@@ -35,32 +39,37 @@ public class Hotel implements Serializable{
 	private short stars;
 	@Column(name="HOTEL_STATUS")
 	private short disabled;
-	@OneToMany
-	@JoinColumn(name="CORPORATE_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Corporate> corporate = new ArrayList<Corporate>();
-	@OneToMany
-	@JoinColumn(name="BOOKING_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Booking> bookings = new ArrayList<Booking>();
-	@OneToMany
-	@JoinColumn(name="ROOM_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<RoomType> roomTypes = new ArrayList<RoomType>();	
-	@OneToMany
-	@JoinColumn(name="CLOSED_DATE_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<ClosedDate> closedDates = new ArrayList<ClosedDate>();
-	@OneToMany
-	@JoinColumn(name="PROMOTION_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Promotion> promotions = new ArrayList<Promotion>();
-	@OneToMany
-	@JoinColumn(name="AVAILABILITY_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Availability> availability = new ArrayList<Availability>();
-	@OneToMany
-	@JoinColumn(name="FACILITY_ID")
+	
+	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Facility> facilities = new ArrayList<Facility>();
+	
 	@OneToOne
 	@JoinColumn(name="LOGIN_ID")
 	private Login login;
 	
 	//GETTERS AND SETTERS
+	public void addCorporate(Corporate company){
+		company.setHotel(this);
+		corporate.add(company);		
+	}
 	public Collection<Facility> getFacilities() {
 		return facilities;
 	}
