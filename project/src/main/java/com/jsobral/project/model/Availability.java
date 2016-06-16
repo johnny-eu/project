@@ -1,7 +1,6 @@
 package com.jsobral.project.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +17,17 @@ import org.springframework.stereotype.Component;
 public class Availability implements Serializable{
 
 
-	private static final long serialVersionUID = -6689263546187866252L;
+	private static final long serialVersionUID = -343540947418259264L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="AVAILABILITY_ID")
 	private int rowId;
-	@Column(name="DATE")
-	private Date date;
+	@Column(name="YEAR")
+	private int year;
+	@Column(name="MONTH")
+	private int month;
+	@Column(name="DAY")
+	private int day;
 	@Column(name="PRICE")
 	private double price;
 	@Column(name="AVAIL_ROOMS")
@@ -54,11 +57,23 @@ public class Availability implements Serializable{
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
-	public Date getDate() {
-		return date;
+	public int getYear() {
+		return year;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public int getMonth() {
+		return month;
+	}
+	public void setMonth(int month) {
+		this.month = month;
+	}
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
 	}
 	public double getPrice() {
 		return price;
@@ -94,10 +109,12 @@ public class Availability implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + day;
 		result = prime * result + ((hotel == null) ? 0 : hotel.hashCode());
+		result = prime * result + month;
 		result = prime * result + ((roomType == null) ? 0 : roomType.hashCode());
 		result = prime * result + rowId;
+		result = prime * result + year;
 		return result;
 	}
 	@Override
@@ -109,15 +126,14 @@ public class Availability implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Availability other = (Availability) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
+		if (day != other.day)
 			return false;
 		if (hotel == null) {
 			if (other.hotel != null)
 				return false;
 		} else if (!hotel.equals(other.hotel))
+			return false;
+		if (month != other.month)
 			return false;
 		if (roomType == null) {
 			if (other.roomType != null)
@@ -126,7 +142,10 @@ public class Availability implements Serializable{
 			return false;
 		if (rowId != other.rowId)
 			return false;
+		if (year != other.year)
+			return false;
 		return true;
 	}
+	
 		
 }
