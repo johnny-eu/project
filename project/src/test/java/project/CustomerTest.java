@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import com.jsobral.project.dao.CustomerDAO;
+import com.jsobral.project.dao.BaseDAO;
 import com.jsobral.project.model.Customer;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/dispatcher-servlet.xml")
@@ -16,7 +15,7 @@ import com.jsobral.project.model.Customer;
 public class CustomerTest {
 	
 	@Autowired
-	CustomerDAO cDAO;
+	BaseDAO dao;
 
 	@Test
 	public void saveCustomerTest(){
@@ -28,6 +27,6 @@ public class CustomerTest {
 		customer.setEmail("john@doe.ie");
 		customer.setPhone("+351956356565");
 
-		cDAO.save(customer);
+		dao.save(customer);
 	}
 }

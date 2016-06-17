@@ -22,9 +22,9 @@ public class ClosedDatesService {
 	
 	public void updateClosedDate(List<ClosedDate> dates,int id){
 		Hotel dbhotel = dao.findById(Hotel.class, id);
-		System.out.println(dates.size());
-		for(ClosedDate date:dates){			
-			dao.updateClosedDate(dbhotel, date.getYear(), date.getMonth(), date.getDay(), date.getClosed());
+		for(ClosedDate date:dates){	
+			date.setHotel(dbhotel);
+			dao.updateClosedDate(date);
 		}
 	}
 }

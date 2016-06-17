@@ -3,6 +3,8 @@ package com.jsobral.project.dao;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.jsobral.project.model.ClosedDate;
 import com.jsobral.project.model.Hotel;
 
 @Repository
@@ -20,18 +22,18 @@ public class ClosedDatesDAO extends BaseDAO{
 	}
 	
 	@Transactional
-	public int updateClosedDate(Hotel hotel,int year,short month,short day,short closed){
+	public int updateClosedDate(ClosedDate date){
 		return super.em.createQuery(
 				"UPDATE ClosedDate SET closed = :closed" +
 			      " WHERE hotel = :hotel"+
 			      " AND year = :year"+
 			      " AND month = :month"+
 			      " AND day = :day")
-				.setParameter("closed", closed)
-				.setParameter("hotel", hotel)
-				.setParameter("year", year)
-				.setParameter("month", month)
-				.setParameter("day", day)
+				.setParameter("closed", date.getClosed())
+				.setParameter("hotel", date.getHotel())
+				.setParameter("year", date.getYear())
+				.setParameter("month", date.getMonth())
+				.setParameter("day", date.getDay())
 				.executeUpdate();
 	}
 }
