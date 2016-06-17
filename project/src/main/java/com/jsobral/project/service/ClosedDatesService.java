@@ -12,13 +12,12 @@ public class ClosedDatesService {
 	
 	@Autowired
 	private ClosedDatesDAO dao;
-
-	public void save(int year,Hotel hotel){	}
 	
-	public List find(int year,Hotel hotel){
-		
-		return null;
+	public List find(int hotelID,int year){
+		Hotel hotel = dao.findById(Hotel.class, hotelID);
+		return dao.findByParams(hotel, year);
 	}
+	
 	
 	public void updateClosedDate(List<ClosedDate> dates,int id){
 		Hotel dbhotel = dao.findById(Hotel.class, id);

@@ -25,15 +25,15 @@ public class Availability implements Serializable{
 	@Column(name="YEAR")
 	private int year;
 	@Column(name="MONTH")
-	private int month;
+	private short month;
 	@Column(name="DAY")
-	private int day;
+	private short day;
 	@Column(name="PRICE")
 	private double price;
 	@Column(name="AVAIL_ROOMS")
 	private short availableRooms;
 	@Column(name="RELEASE_DAYS")
-	private short releaseDays;
+	private int releaseDays;
 	@Column(name="CLOSED")
 	private short closed;
 	
@@ -63,16 +63,16 @@ public class Availability implements Serializable{
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public int getMonth() {
+	public short getMonth() {
 		return month;
 	}
-	public void setMonth(int month) {
+	public void setMonth(short month) {
 		this.month = month;
 	}
-	public int getDay() {
+	public short getDay() {
 		return day;
 	}
-	public void setDay(int day) {
+	public void setDay(short day) {
 		this.day = day;
 	}
 	public double getPrice() {
@@ -87,10 +87,10 @@ public class Availability implements Serializable{
 	public void setAvailableRooms(short availableRooms) {
 		this.availableRooms = availableRooms;
 	}
-	public short getReleaseDays() {
+	public int getReleaseDays() {
 		return releaseDays;
 	}
-	public void setReleaseDays(short releaseDays) {
+	public void setReleaseDays(int releaseDays) {
 		this.releaseDays = releaseDays;
 	}
 	public short getClosed() {
