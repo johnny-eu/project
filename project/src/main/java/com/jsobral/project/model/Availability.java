@@ -11,6 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * availabitity like the rooms available and their price/release for a specific date/room/hotel.
+ * @author joao
+ *Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="AVAILABILITY")
@@ -18,6 +24,7 @@ public class Availability implements Serializable{
 
 
 	private static final long serialVersionUID = -343540947418259264L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="AVAILABILITY_ID")

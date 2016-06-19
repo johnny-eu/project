@@ -17,12 +17,21 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * Corporate, the company name,address, vat number and hotel it belongs to.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="CORPORATE")
 public class Corporate implements Serializable{
 	
 	private static final long serialVersionUID = 3256810273915894350L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CORPORATE_ID")
@@ -34,14 +43,23 @@ public class Corporate implements Serializable{
 	@Column(name="VAT")
 	private String vatNumber;
 	
+	/**
+	 * The company belongs to one hotel
+	 */
 	@ManyToOne
 	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
 	
+	/**
+	 * A compay has one contact associated with it
+	 */
 	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="CONTACT_ID")
 	private CorporateContact contact;
 	
+	/**
+	 * One corporate can create several promotional prices like per room type/season
+	 */
 	@OneToMany(mappedBy="corporate",cascade=CascadeType.ALL)
 	private Collection<PromoPrice> promoPrices = new ArrayList<PromoPrice>();
 	

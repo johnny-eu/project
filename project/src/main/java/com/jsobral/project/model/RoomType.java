@@ -14,6 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * room types, its name, desc, img and max occupancy.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="ROOM_TYPES")
@@ -21,6 +29,7 @@ public class RoomType implements Serializable{
 
 
 	private static final long serialVersionUID = -3109857026185144630L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ROOM_ID")
@@ -38,12 +47,27 @@ public class RoomType implements Serializable{
 	@ManyToOne
 	private Hotel hotel;
 	
-	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
+	/**
+	 * one room is linked to many bookings
+	 */
+	@OneToMany(mappedBy="roomType")
 	private Collection<Booking> bookings = new ArrayList<Booking>();
+	
+	/**
+	 * a room could be linked to several promo prices
+	 */
 	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<PromoPrice> promoPrices = new ArrayList<PromoPrice>();
+	
+	/**
+	 * a room can be linked to many promotions
+	 */
 	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<Promotion> promotions = new ArrayList<Promotion>();
+	
+	/**
+	 * a room has several associated availability rows
+	 */
 	@OneToMany(mappedBy="roomType",cascade=CascadeType.ALL)
 	private Collection<Availability> availability = new ArrayList<Availability>();
 	

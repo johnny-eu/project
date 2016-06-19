@@ -16,6 +16,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * a hotel, its address, name, classification and contacts.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="HOTELS")
@@ -40,27 +48,51 @@ public class Hotel implements Serializable{
 	@Column(name="HOTEL_STATUS")
 	private short disabled;
 	
+	/**
+	 * a hotel may have several corporate contracts
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Corporate> corporate = new ArrayList<Corporate>();
 	
+	/**
+	 * a hotel may have several bookings
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Booking> bookings = new ArrayList<Booking>();
 	
+	/**
+	 * a hotel may have several room types
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<RoomType> roomTypes = new ArrayList<RoomType>();	
 	
+	/**
+	 * a hotel has several close out dates entries
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<ClosedDate> closedDates = new ArrayList<ClosedDate>();
 	
+	/**
+	 * a hotel may have several promotions
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Promotion> promotions = new ArrayList<Promotion>();
 	
+	/**
+	 * a hotel has several availability entries per room type
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Availability> availability = new ArrayList<Availability>();
 	
+	/**
+	 * a hotel has several facilities entries
+	 */
 	@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
 	private Collection<Facility> facilities = new ArrayList<Facility>();
 	
+	/**
+	 * a hotel has one login associated
+	 */
 	@OneToOne
 	@JoinColumn(name="LOGIN_ID")
 	private Login login;

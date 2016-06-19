@@ -12,6 +12,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * promotions like the start date, end date, name and description, image and price.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="PROMOTIONS")
@@ -19,6 +27,7 @@ public class Promotion implements Serializable{
 	
 
 	private static final long serialVersionUID = 771839612881761458L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PROMOTION_ID")
@@ -36,14 +45,21 @@ public class Promotion implements Serializable{
 	@Column(name="PROMOTION_PRICE")
 	private double price;
 	
+	/**
+	 * A promotion belongs to one hotel
+	 */
 	@ManyToOne
 	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
+	
+	/**
+	 * a promotion is linked to one room type
+	 */
 	@ManyToOne
 	@JoinColumn(name="ROOM_ID")
 	private RoomType roomType;
 	
-	
+	//GETTERS AND SETTERS
 	public int getPromotionId() {
 		return promotionId;
 	}

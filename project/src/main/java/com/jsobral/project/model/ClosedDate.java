@@ -11,6 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * Closed Dates, their date, hotel and closed status.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="CLOSED_DATES")
@@ -18,19 +26,28 @@ public class ClosedDate implements Serializable{
 	
 
 	private static final long serialVersionUID = 5373683123856215630L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CLOSED_DATE_ID")
 	private int closedDateId;
+	
 	@Column(name="YEAR")
 	private int year;
 	@Column(name="MONTH")
 	private short month;
 	@Column(name="DAY")
 	private short day;
+	
+	/**
+	 * Status for closed date. 0 means false or not closed and 1 means true, closed
+	 */
 	@Column(name="CLOSED")
 	private short closed;
 	
+	/**
+	 * Hotel this close out belongs to
+	 */
 	@ManyToOne
 	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;

@@ -68,18 +68,40 @@ public class CorporateTests {
 	@Transactional
 	public void testFilteredGet() {
 
+		// creating corp contact to add to company
+		CorporateContact contact = new CorporateContact();
+		contact.setContactName("John");
+		contact.setContactSurname("Doe");
+		CorporateContact savedContact = (CorporateContact) dao.save(contact);
+
+		// get hotel object//in app get hotel by id
+		Hotel hotel = new Hotel();
+		hotel.setHotelAddress("Cork");
+		hotel.setHotelName("Awesome Hotel");
+		hotel.setStars((short) 5);
+		Hotel savedHotel = (Hotel) dao.save(hotel);
+
+		// creating new corporate to save
+		company.setCorporateName("NEW CORP");
+		company.setCorporateAddress("Dublin");
+		company.setVatNumber("ZVATN");
+		company.setContact(savedContact);
+		company.setHotel(savedHotel);
+		
+		dao.save(company);
+		
 		// preping search fields object to be sent to find method, 
 		// only stars is matchable
 		Corporate searchObject = new Corporate();
 		searchObject.setCorporateName("");
 		searchObject.setCorporateAddress("");
-		searchObject.setVatNumber("NE");
-		
+		searchObject.setVatNumber("ZV");
+		searchObject.setHotel(savedHotel);
 		
 		List testList = service.findByParams(searchObject);
 		Corporate corp0 = (Corporate) testList.get(0);
 		System.out.println(corp0.getCorporateName() + " " + corp0.getVatNumber());
-		assertEquals(testList.size(), 4);
+		assertEquals(testList.size(), 1);
 
 	}
 

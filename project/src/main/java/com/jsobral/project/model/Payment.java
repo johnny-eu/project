@@ -10,6 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * payments such as card information and amount to pay.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="PAYMENTS")
@@ -17,6 +25,7 @@ public class Payment implements Serializable{
 	
 
 	private static final long serialVersionUID = -3718766294958689283L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PAY_ID")
@@ -33,10 +42,14 @@ public class Payment implements Serializable{
 	private double total;
 	@Column(name="BOOKING_COMMISSION")
 	private double commission;
+	
+	/**
+	 * a payment is associated with one booking
+	 */
 	@OneToOne
 	private Booking booking;
 	
-	
+	//GETTERS AND SETTERS
 	public Booking getBooking() {
 		return booking;
 	}

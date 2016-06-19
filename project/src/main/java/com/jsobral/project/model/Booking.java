@@ -15,7 +15,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * Bookings with their dates and customer/payment information for hotels to access on the browser.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="BOOKINGS")
@@ -23,6 +30,7 @@ public class Booking implements Serializable{
 
 	
 	private static final long serialVersionUID = 378711901115296383L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="BOOKING_ID")
@@ -43,16 +51,30 @@ public class Booking implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date created;
 	
-	
+	/**
+	 * The customer the booking belongs to
+	 */
 	@ManyToOne
 	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
+	
+	/**
+	 * The hotel booked
+	 */
 	@ManyToOne
 	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;
+	
+	/**
+	 * the room type booked
+	 */
 	@ManyToOne
 	@JoinColumn(name="ROOM_ID")
 	private RoomType roomType;	
+	
+	/**
+	 * the payment associated with this booking
+	 */
 	@OneToOne
 	@JoinColumn(name="PAY_ID")
 	private Payment payment;

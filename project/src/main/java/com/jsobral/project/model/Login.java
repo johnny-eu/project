@@ -10,6 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * login details like username and password.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="LOGIN_DETAILS")
@@ -17,6 +25,7 @@ public class Login implements Serializable{
 
 
 	private static final long serialVersionUID = 3609928620497828591L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="LOGIN_ID")
@@ -26,6 +35,9 @@ public class Login implements Serializable{
 	@Column(name="PASSWORD")
 	private String password;
 	
+	/**
+	 * login details are associated with one hotel
+	 */
 	@OneToOne
 	private Hotel hotel;
 	
@@ -37,6 +49,7 @@ public class Login implements Serializable{
 		this.password = password;
 	}
 	
+	//GETTERS AND SETTERS
 	public Hotel getHotel() {
 		return hotel;
 	}

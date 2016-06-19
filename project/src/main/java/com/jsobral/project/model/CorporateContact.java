@@ -10,7 +10,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * a corporate contact, the person associated with a company contract.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="CORPORATE_CONTACTS")
@@ -31,6 +38,9 @@ public class CorporateContact implements Serializable{
 	@Column(name="CONTACT_EMAIL")
 	private String contactEmail;
 	
+	/**
+	 * contact associated with a company
+	 */
 	@OneToOne
 	private Corporate corporate;
 	

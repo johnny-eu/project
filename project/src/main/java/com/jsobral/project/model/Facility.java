@@ -11,6 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * hotel facilities like if it has a restaurant, bar or wifi, its services. Each instance relates to one service
+ * so each hotel will have a List of facilities associated with it, each with supported status.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Entity
 @Component
 @Table(name="FACILITIES")
@@ -27,6 +36,9 @@ public class Facility implements Serializable{
 	@Column(name="SUPPORTED")
 	private short supported;
 	
+	/**
+	 * a hotel has several faicilites, its a fixed set that states if it is supported or not
+	 */
 	@ManyToOne
 	@JoinColumn(name="HOTEL_ID")
 	private Hotel hotel;

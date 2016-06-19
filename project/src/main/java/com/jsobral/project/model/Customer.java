@@ -13,6 +13,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used as a DTO to send data from view to the DB and back. Used to carry data about
+ * a hotel customer that makes bookings. Its peronal details like name and contact info.
+ * Hibernate uses this entity as a map to a DB table and is anotated accordingly including relations 
+ * to other tables.
+ * @author joao
+ * Copyright 2016, Joao Sobral, All rights reserved.
+ */
 @Component
 @Entity
 @Table(name="CUSTOMERS")
@@ -37,6 +45,9 @@ public class Customer implements Serializable{
 	@Column(name="CUST_COUNTRY")
 	private String country;
 	
+	/**
+	 * a customer can have many bookings
+	 */
 	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
 	private Collection<Booking> bookings = new ArrayList<Booking>();
 	
