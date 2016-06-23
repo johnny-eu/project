@@ -20,7 +20,7 @@ public class PaymentTests {
 	@Test
 	public void testInsert(){
 		Payment payment = new Payment();
-		payment.setType("VISA");
+		payment.setType(Payment.VISA);
 		payment.setCard(4444555566667777L);
 		payment.setExpiry(416);
 		payment.setCode(345);

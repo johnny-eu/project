@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,6 +30,9 @@ import org.springframework.stereotype.Component;
 @Table(name="BOOKINGS")
 public class Booking implements Serializable{
 
+	public static final short PENDING = 1;
+	public static final short CONFIRMED = 2;
+	public static final short CANCELLED = 3;
 	
 	private static final long serialVersionUID = 378711901115296383L;
 	
@@ -35,10 +40,17 @@ public class Booking implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="BOOKING_ID")
 	private int bookingId;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="ARRIVAL")
+	@Temporal(TemporalType.DATE)
 	private Date arrival;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	@Column(name="DEPARTURE")
 	private Date departure;
+	
 	@Column(name="ADUTS")
 	private short adults;
 	@Column(name="CHILDREN")
@@ -47,6 +59,8 @@ public class Booking implements Serializable{
 	private short status;
 	@Column(name="HOTEL_REF")
 	private String hotelReference;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="DATE_CREATED")
 	@Temporal(TemporalType.DATE)
 	private Date created;

@@ -23,6 +23,9 @@ import org.springframework.stereotype.Component;
 @Table(name="PAYMENTS")
 public class Payment implements Serializable{
 	
+	final public static short AMEX = 3;
+	final public static short VISA = 4;
+	final public static short MASTERCARD = 5;	
 
 	private static final long serialVersionUID = -3718766294958689283L;
 	
@@ -31,7 +34,7 @@ public class Payment implements Serializable{
 	@Column(name="PAY_ID")
 	private int payId;
 	@Column(name="CARD_TYPE")
-	private String type;
+	private short type;
 	@Column(name="CARD_NUM")
 	private long card;
 	@Column(name="CARD_EXP")
@@ -62,10 +65,10 @@ public class Payment implements Serializable{
 	public void setPayId(int payId) {
 		this.payId = payId;
 	}
-	public String getType() {
+	public short getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(short type) {
 		this.type = type;
 	}
 	public long getCard() {
