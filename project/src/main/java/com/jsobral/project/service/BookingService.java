@@ -1,10 +1,13 @@
 package com.jsobral.project.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jsobral.project.dao.BookingDAO;
 import com.jsobral.project.model.Booking;
+import com.jsobral.project.model.Customer;
+import com.jsobral.project.model.Hotel;
 
 /**
  * Provides the services associated with Bookings like retrieving list of bookings or 
@@ -23,7 +26,15 @@ public class BookingService {
 	 * @param booking Instance with search criteria
 	 * @return List of bookings that match the search criteria
 	 */
-	public List findByParams(Booking booking){
+	public List findByParams(int hotelId,String arrival,String custEmail,String custSurname,String hotelRef){
+		Hotel hotel = dao.findById(Hotel.class, hotelId);
+		Booking booking = new Booking();
+		booking.setHotel(hotel);
+		booking.setArrival(new Date(arrival));
+		booking.setCustomer(new Customer());
+		booking.getCustomer().setSurname(custSurname);
+		booking.getCustomer().setEmail(custEmail);
+		booking.setHotelReference(hotelRef);
 		return dao.findByParams(booking);
 	}
 	
